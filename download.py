@@ -7,14 +7,13 @@ from requests.exceptions import ConnectionError
 
 
 def log_info(message, path):
-	filename = None
-	print(path)
-	# if path.split('\\')[-1] != '':
-	# 	filename = os.path.join(path, path.split('\\')[-1])
-	# else:
-	# 	filename = os.path.join(path, path.split('\\')[-2])
-	# logging.basicConfig(filename=f"{filename}.txt", level=logging.INFO, format="%(asctime)s %(message)s")
-	# logging.info(message)
+	filename = ''
+	if path.split('\\')[-1] != '':
+		filename = os.path.join(path, path.split('\\')[-1])
+	else:
+		filename = os.path.join(path, path.split('\\')[-2])
+	logging.basicConfig(filename=f"{filename}.txt", level=logging.INFO, format="%(asctime)s %(message)s")
+	logging.info(message)
 
 
 
@@ -54,10 +53,6 @@ class BaseDownloader:
 		if headers:
 			self.headers = headers
 		
-
-
-	# def log(self, messages):
-
 
 	def info(self):
 		print("base_url:", self.base_url)
